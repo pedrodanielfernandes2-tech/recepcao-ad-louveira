@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#15805F">
+<meta name="robots" content="noindex">
+<title>Painel da Equipe — AD Louveira</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="app">
+
+  <div class="topo">
+    <div class="logo">
+      <div class="logo-ad" aria-hidden="true">AD</div>
+      <div>
+        <div class="logo-sub">Área da equipe</div>
+        <div class="logo-nome marca">ASSEMBLEIA DE DEUS <span>LOUVEIRA</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a class="voltar" href="index.html">Tela da recepção</a>
+      <button class="btn btn-secundario btn-pequeno" id="sair" type="button" hidden>Sair</button>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <form class="folha login" id="form-login" hidden>
+    <div class="etiqueta">Entrar</div>
+    <p style="margin:0;color:var(--texto-3);font-size:14px">Digite a senha da equipe para ver os registros.</p>
+    <label class="campo">Senha<input type="password" name="senha" required autocomplete="current-password"></label>
+    <div class="erro" id="erro-login" hidden></div>
+    <button class="btn btn-primario" type="submit" style="justify-content:center">Entrar</button>
+  </form>
+
+  <!-- PAINEL -->
+  <section id="painel" hidden style="display:flex;flex-direction:column;gap:16px">
+    <div class="abas" role="tablist">
+      <button type="button" role="tab" data-aba="decisoes" aria-selected="true">Aceitaram a Jesus<span class="n" data-n="decisoes"></span></button>
+      <button type="button" role="tab" data-aba="pedidos" aria-selected="false">Pedidos de oração<span class="n" data-n="pedidos"></span></button>
+      <button type="button" role="tab" data-aba="visitantes" aria-selected="false">Visitantes<span class="n" data-n="visitantes"></span></button>
+      <button type="button" role="tab" data-aba="aniversariantes" aria-selected="false">Aniversariantes</button>
+    </div>
+
+    <div class="filtros" id="filtros">
+      <select id="f-periodo" aria-label="Período">
+        <option value="7">Últimos 7 dias</option>
+        <option value="30" selected>Últimos 30 dias</option>
+        <option value="90">Últimos 3 meses</option>
+        <option value="0">Tudo</option>
+      </select>
+      <label class="check" style="font-size:14px"><input type="checkbox" id="f-pendentes" checked>Só pendentes</label>
+      <input type="search" id="f-busca" placeholder="Buscar por nome" aria-label="Buscar por nome">
+      <span class="espaco"></span>
+      <button class="btn btn-secundario btn-pequeno" type="button" id="exportar">Baixar planilha (CSV)</button>
+    </div>
+
+    <form class="novo-niver" id="novo-niver" hidden>
+      <label class="campo">Nome<input name="nome" required maxlength="120"></label>
+      <label class="campo">Data de nascimento<input name="nascimento" type="date" required></label>
+      <button class="btn btn-primario" type="submit">Adicionar</button>
+    </form>
+
+    <div class="erro" id="erro-painel" hidden></div>
+    <div class="registros" id="registros"></div>
+    <div class="vazio" id="vazio" hidden>Nada por aqui com esses filtros.</div>
+  </section>
+
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="js/config.js"></script>
+<script src="js/painel.js"></script>
+</body>
+</html>
