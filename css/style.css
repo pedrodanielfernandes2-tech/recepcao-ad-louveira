@@ -133,3 +133,5 @@ input::placeholder,textarea::placeholder{color:#97A89F}
 .novo-niver .campo{flex:1 1 200px}
 .link-apagar{border:none;background:none;color:var(--erro);font-size:13px;cursor:pointer;text-decoration:underline}
 @media (max-width:720px){.registro{grid-template-columns:1fr}.registro .lado{align-items:flex-start;flex-direction:row}}
+.obrig{color:var(--erro);font-weight:700}
+.legenda{margin:0;font-size:12px;color:var(--texto-3)}

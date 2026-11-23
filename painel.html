@@ -48,12 +48,13 @@
 
     <div class="filtros" id="filtros">
       <select id="f-periodo" aria-label="Período">
+        <option value="hoje" selected>Hoje</option>
         <option value="7">Últimos 7 dias</option>
-        <option value="30" selected>Últimos 30 dias</option>
+        <option value="30">Últimos 30 dias</option>
         <option value="90">Últimos 3 meses</option>
         <option value="0">Tudo</option>
       </select>
-      <label class="check" style="font-size:14px"><input type="checkbox" id="f-pendentes" checked>Só pendentes</label>
+      <label class="check" style="font-size:14px"><input type="checkbox" id="f-pendentes">Só pendentes</label>
       <input type="search" id="f-busca" placeholder="Buscar por nome" aria-label="Buscar por nome">
       <span class="espaco"></span>
       <button class="btn btn-secundario btn-pequeno" type="button" id="exportar">Baixar planilha (CSV)</button>

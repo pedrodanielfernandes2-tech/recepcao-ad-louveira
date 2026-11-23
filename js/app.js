@@ -10,7 +10,7 @@
   $$('[data-cfg]').forEach(el => { el.textContent = cfg[el.dataset.cfg] || ''; });
 
   // ---------- Navegação ----------
-  const VIEWS = ['inicio', 'oracao', 'visitante', 'decisao', 'aniversariantes'];
+  const VIEWS = ['inicio', 'oracao', 'visitante', 'decisao', 'aniversariantes', 'pedidos'];
   function mostrar() {
     const v = (location.hash || '#inicio').slice(1);
     const atual = VIEWS.includes(v) ? v : 'inicio';
@@ -18,6 +18,7 @@
     window.scrollTo(0, 0);
     if (atual === 'inicio') carregarContagem();
     if (atual === 'aniversariantes') carregarAniversariantes();
+    if (atual === 'pedidos') carregarPedidos();
     if (['oracao', 'visitante', 'decisao'].includes(atual)) resetarForm(atual);
   }
   window.addEventListener('hashchange', mostrar);
@@ -30,7 +31,7 @@
       if (location.hash && location.hash !== '#inicio') location.hash = '#inicio';
     }, (cfg.inatividadeSegundos || 90) * 1000);
   }
-  ['pointerdown', 'keydown', 'input'].forEach(e => document.addEventListener(e, cutucar, { passive: true }));
+  ['pointerdown', 'keydown', 'input', 'wheel', 'touchmove'].forEach(e => document.addEventListener(e, cutucar, { passive: true }));
 
   // ---------- Início: contadores ----------
   let offset = 0, avisoFechadoEm = null;
@@ -83,7 +84,8 @@
 
   function validar(form, nome) {
     const faltando = OBRIGATORIOS[nome].filter(c => !form.elements[c].value.trim());
-    const consent = form.elements.consentimento.checked;
+    // No pedido de oração a autorização é opcional; nos outros formulários é obrigatória
+    const consent = !form.elements.consentimento.required || form.elements.consentimento.checked;
     const ok = faltando.length === 0 && consent;
     $('button[type="submit"]', form).disabled = !ok;
     $('[data-dica]', form).textContent = ok ? 'Tudo certo? É só enviar.'
@@ -153,6 +155,41 @@
     $('[data-passo="classe"]').hidden = !d.classe;
     $('[data-passo="biblia"]').hidden = !d.biblia;
   }
+
+  // ---------- Ler pedidos ----------
+  async function carregarPedidos() {
+    const lista = $('#pedidos-lista');
+    lista.innerHTML = '';
+    $('#pedidos-erro').hidden = true;
+    const periodo = $('#pedidos-periodo').value;
+    const inicio = new Date(); inicio.setHours(0, 0, 0, 0);
+    if (periodo !== 'hoje') inicio.setDate(inicio.getDate() - Number(periodo) + 1);
+    const { data, error } = await db.from('recepcao_pedidos')
+      .select('nome, telefone, pedido, quer_ligacao, criado_em')
+      .gte('criado_em', inicio.toISOString())
+      .order('criado_em', { ascending: false });
+    if (error) { $('#pedidos-erro').hidden = false; return; }
+    const itens = data || [];
+    $('#pedidos-total').textContent = itens.length + (itens.length === 1 ? ' pedido' : ' pedidos');
+    $('#pedidos-vazio').hidden = itens.length > 0;
+    for (const r of itens) {
+      const card = document.createElement('div'); card.className = 'registro';
+      const esq = document.createElement('div');
+      const n = document.createElement('div'); n.className = 'nome'; n.textContent = r.nome;
+      const meta = document.createElement('div'); meta.className = 'meta';
+      const quando = document.createElement('span');
+      quando.textContent = new Date(r.criado_em).toLocaleString('pt-BR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
+      meta.append(quando);
+      if (r.telefone) { const t = document.createElement('span'); t.textContent = r.telefone; meta.append(t); }
+      esq.append(n, meta);
+      const lado = document.createElement('div'); lado.className = 'lado';
+      if (r.quer_ligacao) { const tg = document.createElement('span'); tg.className = 'tag alerta'; tg.textContent = 'Quer ligação de pastor'; lado.append(tg); }
+      const txt = document.createElement('div'); txt.className = 'texto'; txt.textContent = r.pedido;
+      card.append(esq, lado, txt);
+      lista.append(card);
+    }
+  }
+  $('#pedidos-periodo').addEventListener('change', carregarPedidos);
 
   // ---------- Aniversariantes ----------
   async function carregarAniversariantes() {

@@ -69,8 +69,14 @@
     if (aba === 'aniversariantes') {
       q = q.order('nome');
     } else {
-      const dias = Number($('#f-periodo').value);
-      if (dias > 0) q = q.gte('criado_em', new Date(Date.now() - dias * 864e5).toISOString());
+      const periodo = $('#f-periodo').value;
+      if (periodo === 'hoje') {
+        const inicio = new Date(); inicio.setHours(0, 0, 0, 0);
+        q = q.gte('criado_em', inicio.toISOString());
+      } else {
+        const dias = Number(periodo);
+        if (dias > 0) q = q.gte('criado_em', new Date(Date.now() - dias * 864e5).toISOString());
+      }
       if ($('#f-pendentes').checked) q = q.eq(a.feito, false);
       q = q.order('criado_em', { ascending: false });
     }
@@ -157,6 +163,7 @@
         if (r.convidado_por) tags.append(el('span', 'tag', 'Convidado por ' + r.convidado_por));
       }
       if (aba === 'pedidos' && r.quer_ligacao) tags.append(el('span', 'tag alerta', 'Quer ligação de pastor'));
+      if (aba === 'pedidos' && !r.consentimento) tags.append(el('span', 'tag', 'Sem autorização para guardar contato'));
       if (aba === 'visitantes') {
         if (r.primeira_vez) tags.append(el('span', 'tag', 'Primeira visita'));
         if (r.quer_contato) tags.append(el('span', 'tag alerta', 'Quer contato'));

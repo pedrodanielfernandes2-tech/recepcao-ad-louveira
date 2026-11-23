@@ -69,7 +69,7 @@
 
       <div class="rodape">
         <span data-cfg="endereco"></span>
-        <span><span data-cfg="horarios"></span> · <a href="painel.html">Área da equipe</a></span>
+        <span><span data-cfg="horarios"></span> · <a href="#pedidos">Ler pedidos</a> · <a href="painel.html">Área da equipe</a></span>
       </div>
     </div>
   </section>
@@ -78,19 +78,23 @@
   <section data-view="oracao" hidden>
     <div style="display:flex;flex-direction:column;gap:18px">
       <div class="topo"><a class="voltar" href="#inicio">‹ Voltar</a><div class="logo-mini"><div class="logo-ad" aria-hidden="true">AD</div><span>Louveira</span></div></div>
-      <div class="cabecalho"><h1>Pedido de Oração</h1><p>Seu pedido vai direto para a equipe de intercessão. Ninguém mais aqui na recepção verá.</p></div>
+      <div class="topo">
+        <div class="cabecalho"><h1>Pedido de Oração</h1><p>Seu pedido vai para a lista de oração da igreja e fica visível em “Ler pedidos”.</p></div>
+        <a class="btn btn-secundario" href="#pedidos">Ler pedidos</a>
+      </div>
 
       <form class="folha" data-form="oracao" novalidate>
         <div class="etiqueta">Novo pedido</div>
         <div class="campos">
-          <label class="campo">Nome<input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
+          <label class="campo"><span>Nome <span class="obrig" aria-hidden="true">*</span></span><input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
           <label class="campo">Telefone (opcional)<input name="telefone" type="tel" maxlength="30" placeholder="(19) 99999-9999" autocomplete="off"></label>
-          <label class="campo largo">Pedido de oração<textarea name="pedido" required maxlength="4000" placeholder="Escreva o pedido aqui..."></textarea></label>
+          <label class="campo largo"><span>Pedido de oração <span class="obrig" aria-hidden="true">*</span></span><textarea name="pedido" required maxlength="4000" placeholder="Escreva o pedido aqui..."></textarea></label>
         </div>
         <div class="opcoes">
           <label class="check"><input type="checkbox" name="quer_ligacao">Desejo receber uma ligação de um pastor</label>
-          <label class="check consent"><input type="checkbox" name="consentimento" required>Autorizo a AD Louveira a guardar estes dados para oração e contato.</label>
+          <label class="check consent"><input type="checkbox" name="consentimento">Autorizo a AD Louveira a guardar estes dados para oração e contato.</label>
         </div>
+        <p class="legenda"><span class="obrig">*</span> Campos obrigatórios</p>
         <div class="erro" data-erro hidden></div>
         <div class="acoes"><span class="dica" data-dica></span><button class="btn btn-primario" type="submit">Enviar pedido</button></div>
       </form>
@@ -112,7 +116,7 @@
 
       <form class="folha" data-form="visitante" novalidate>
         <div class="campos">
-          <label class="campo">Nome completo<input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
+          <label class="campo"><span>Nome completo <span class="obrig" aria-hidden="true">*</span></span><input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
           <label class="campo">WhatsApp<input name="whatsapp" type="tel" maxlength="30" placeholder="(19) 99999-9999" autocomplete="off"></label>
           <label class="campo">Bairro / Cidade<input name="bairro" type="text" maxlength="120" placeholder="Ex.: Centro, Louveira" autocomplete="off"></label>
           <label class="campo">Como conheceu a igreja?
@@ -124,8 +128,9 @@
         <div class="opcoes">
           <label class="check"><input type="checkbox" name="primeira_vez">É a primeira vez que visito</label>
           <label class="check"><input type="checkbox" name="quer_contato">Quero receber contato da igreja</label>
-          <label class="check consent"><input type="checkbox" name="consentimento" required>Autorizo a AD Louveira a guardar estes dados para contato.</label>
+          <label class="check consent"><input type="checkbox" name="consentimento" required><span>Autorizo a AD Louveira a guardar estes dados para contato. <span class="obrig" aria-hidden="true">*</span></span></label>
         </div>
+        <p class="legenda"><span class="obrig">*</span> Campos obrigatórios</p>
         <div class="erro" data-erro hidden></div>
         <div class="acoes"><span class="dica" data-dica></span><button class="btn btn-primario" type="submit">Concluir cadastro</button></div>
       </form>
@@ -153,7 +158,7 @@
         </div>
         <input type="hidden" name="tipo" value="aceitou">
         <div class="campos">
-          <label class="campo largo">Nome completo<input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
+          <label class="campo largo"><span>Nome completo <span class="obrig" aria-hidden="true">*</span></span><input name="nome" type="text" required maxlength="120" placeholder="Seu nome" autocomplete="off"></label>
           <label class="campo">Telefone / WhatsApp<input name="telefone" type="tel" maxlength="30" placeholder="(19) 99999-9999" autocomplete="off"></label>
           <label class="campo">Data de nascimento<input name="nascimento" type="date"></label>
           <label class="campo">Bairro<input name="bairro" type="text" maxlength="120" placeholder="Ex.: Centro" autocomplete="off"></label>
@@ -163,8 +168,9 @@
           <label class="check"><input type="checkbox" name="classe" checked>Quero participar da classe de novos convertidos</label>
           <label class="check"><input type="checkbox" name="batismo">Tenho interesse no batismo nas águas</label>
           <label class="check"><input type="checkbox" name="biblia">Gostaria de receber uma Bíblia</label>
-          <label class="check consent"><input type="checkbox" name="consentimento" required>Autorizo a AD Louveira a guardar estes dados para contato e acompanhamento.</label>
+          <label class="check consent"><input type="checkbox" name="consentimento" required><span>Autorizo a AD Louveira a guardar estes dados para contato e acompanhamento. <span class="obrig" aria-hidden="true">*</span></span></label>
         </div>
+        <p class="legenda"><span class="obrig">*</span> Campos obrigatórios</p>
         <div class="erro" data-erro hidden></div>
         <div class="acoes"><span class="dica" data-dica></span><button class="btn btn-primario" type="submit">Registrar decisão</button></div>
       </form>
@@ -182,6 +188,27 @@
         </div>
         <div class="linha-botoes"><a class="btn btn-secundario" href="#inicio">Voltar ao início</a><button class="btn btn-primario" type="button" data-novo="decisao">+ Registrar outra decisão</button></div>
       </div>
+    </div>
+  </section>
+
+  <!-- LER PEDIDOS -->
+  <section data-view="pedidos" hidden>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="topo"><a class="voltar" href="#oracao">‹ Voltar</a><div class="logo-mini"><div class="logo-ad" aria-hidden="true">AD</div><span>Louveira</span></div></div>
+      <div class="topo">
+        <div class="cabecalho"><h1>Pedidos de oração</h1><p>Vamos orar uns pelos outros.</p></div>
+        <div class="filtros">
+          <select id="pedidos-periodo" aria-label="Período">
+            <option value="hoje" selected>Hoje</option>
+            <option value="7">Últimos 7 dias</option>
+            <option value="30">Últimos 30 dias</option>
+          </select>
+          <span class="pilula" id="pedidos-total"></span>
+        </div>
+      </div>
+      <div class="registros" id="pedidos-lista"></div>
+      <div class="vazio" id="pedidos-vazio" hidden>Nenhum pedido nesse período.</div>
+      <div class="erro" id="pedidos-erro" hidden>Não conseguimos carregar os pedidos. Verifique a internet.</div>
     </div>
   </section>
 
