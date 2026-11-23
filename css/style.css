@@ -1,0 +1,135 @@
+:root{
+  --verde:#15805F; --verde-escuro:#12604A; --verde-claro:#E1F2EC; --verde-borda:#BFE3D5;
+  --fundo:#F6FAF8; --branco:#FFFFFF; --borda:#D8E6DF;
+  --texto:#1E2A25; --texto-2:#46564F; --texto-3:#6B7A73; --erro:#B42318; --erro-fundo:#FEF3F2;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo);color:var(--texto);font-family:'Public Sans',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+h1,h2,.marca{font-family:'Poppins',system-ui,sans-serif}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+input::placeholder,textarea::placeholder{color:#97A89F}
+[hidden]{display:none !important}
+
+.app{max-width:1100px;margin:0 auto;min-height:100vh;padding:32px 40px 24px;display:flex;flex-direction:column;gap:20px}
+
+/* Topo */
+.topo{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:16px}
+.logo-ad{width:56px;height:56px;border-radius:15px;background:var(--verde);display:flex;align-items:center;justify-content:center;color:#fff;font-family:'Poppins';font-weight:800;font-size:20px;flex-shrink:0}
+.logo-sub{font-size:12px;font-weight:600;letter-spacing:2px;color:#64756D;text-transform:uppercase}
+.logo-nome{font-family:'Poppins';font-weight:800;font-size:24px;line-height:1.1;color:var(--verde)}
+.logo-nome span{color:var(--texto);font-weight:700}
+.logo-mini{display:flex;align-items:center;gap:8px}
+.logo-mini .logo-ad{width:30px;height:30px;border-radius:9px;font-size:12px}
+.logo-mini span{font-size:12px;font-weight:600;letter-spacing:1px;color:#64756D;text-transform:uppercase}
+
+.voltar{font-size:15px;font-weight:600;color:var(--verde);display:inline-flex;align-items:center;gap:6px;padding:10px 4px;background:none;border:none;cursor:pointer}
+
+.data-nav{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--borda);border-radius:999px;padding:6px 8px}
+.data-nav button{width:36px;height:36px;border-radius:50%;border:none;background:var(--verde-claro);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.data-nav .rotulo{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;min-width:170px;justify-content:center}
+
+.aviso{display:flex;align-items:center;gap:12px;background:var(--verde-claro);border:1px solid var(--verde-borda);border-radius:12px;padding:12px 18px;color:var(--verde-escuro);font-size:14px}
+.aviso p{margin:0;flex-grow:1}
+.aviso button{border:none;background:none;color:inherit;font-size:20px;cursor:pointer;padding:4px 8px}
+
+.saudacao{font-size:16px;color:var(--texto-2);margin:0}
+
+/* Cartões da tela inicial */
+.grade{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;flex-grow:1}
+.cartao{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#fff;border:1px solid var(--borda);border-radius:20px;padding:26px 20px;text-align:center;min-height:190px;transition:transform .12s, box-shadow .12s}
+.cartao:active{transform:scale(.985)}
+.cartao:hover{box-shadow:0 8px 20px rgba(21,128,95,.10)}
+.cartao .icone{width:72px;height:72px;border-radius:50%;background:var(--verde-claro);display:flex;align-items:center;justify-content:center}
+.cartao .titulo{font-size:19px;font-weight:600}
+.cartao .desc{font-size:14px;color:var(--texto-3)}
+.selo{position:absolute;top:16px;right:16px;background:var(--verde);color:#fff;font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px}
+
+.rodape{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:13px;color:#7A8A83;border-top:1px solid var(--borda);padding-top:16px}
+.rodape a{color:#7A8A83;text-decoration:underline}
+
+/* Páginas de formulário */
+.cabecalho h1{margin:0;font-weight:700;font-size:28px;color:var(--verde)}
+.cabecalho p{margin:4px 0 0;font-size:15px;color:var(--texto-3)}
+.folha{background:#fff;border:1px solid var(--borda);border-radius:18px;box-shadow:0 10px 24px rgba(21,128,95,.08);padding:30px 36px;width:100%;max-width:820px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.etiqueta{font-size:13px;font-weight:700;color:var(--verde);text-transform:uppercase;letter-spacing:1px}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px}
+.campo{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--texto-2)}
+.campo.largo{grid-column:1 / -1}
+.campo input,.campo select,.campo textarea{font-size:16px;font-weight:400;padding:12px 14px;border:1px solid var(--borda);border-radius:10px;background:#fff;color:var(--texto);width:100%}
+.campo textarea{resize:vertical;min-height:120px}
+.campo input:focus,.campo select:focus,.campo textarea:focus{outline:2px solid var(--verde);outline-offset:1px;border-color:var(--verde)}
+.opcoes{display:flex;flex-direction:column;gap:10px;background:var(--fundo);border-radius:12px;padding:14px 16px}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--texto);cursor:pointer}
+.check input{width:20px;height:20px;margin:0;flex-shrink:0;accent-color:var(--verde)}
+.consent{font-size:13px;color:var(--texto-2)}
+.alternar{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.alternar button{font-size:15px;font-weight:600;border-radius:12px;padding:14px 16px;cursor:pointer;border:1.5px solid var(--verde);background:#fff;color:var(--verde)}
+.alternar button[aria-pressed="true"]{background:var(--verde);color:#fff}
+.acoes{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.dica{font-size:13px;color:var(--texto-3)}
+.erro{background:var(--erro-fundo);color:var(--erro);border-radius:10px;padding:10px 14px;font-size:14px}
+
+.btn{font-size:15px;font-weight:600;border-radius:10px;padding:13px 24px;cursor:pointer;border:1px solid var(--verde);display:inline-flex;align-items:center;gap:8px;min-height:46px}
+.btn-primario{background:var(--verde);color:#fff}
+.btn-primario:disabled{opacity:.45;cursor:not-allowed}
+.btn-secundario{background:#fff;color:var(--verde)}
+
+/* Tela de sucesso */
+.sucesso{display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center}
+.sucesso .icone{width:76px;height:76px;border-radius:50%;background:var(--verde-claro);display:flex;align-items:center;justify-content:center}
+.sucesso h2{margin:0;font-weight:700;font-size:26px;color:var(--verde)}
+.sucesso p{margin:0;font-size:15px;color:var(--texto-2);max-width:520px}
+.versiculo{width:100%;background:var(--fundo);border-radius:14px;padding:16px 22px}
+.versiculo q{font-size:16px;font-style:italic;line-height:1.5;quotes:'“' '”'}
+.versiculo small{display:block;font-size:12px;font-weight:600;color:#64756D;margin-top:6px;letter-spacing:.5px}
+.passos{width:100%;display:flex;flex-direction:column;gap:10px;text-align:left}
+.passos .t{font-size:12px;font-weight:700;color:#7A8A83;text-transform:uppercase;letter-spacing:1px}
+.passo{display:flex;align-items:center;gap:10px;font-size:15px}
+.passo b{width:26px;height:26px;border-radius:50%;background:var(--verde);color:#fff;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.linha-botoes{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+
+/* Aniversariantes */
+.lista-niver{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.niver{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:14px 18px}
+.niver .dia{width:46px;height:46px;border-radius:50%;background:var(--verde-claro);display:flex;align-items:center;justify-content:center;font-family:'Poppins';font-weight:700;color:var(--verde);flex-shrink:0}
+.niver.hoje{border-color:var(--verde);box-shadow:0 0 0 2px var(--verde-claro)}
+.niver .nome{font-size:15px;font-weight:600}
+.niver .quando{font-size:13px;color:var(--texto-3)}
+.pilula{font-size:13px;font-weight:600;color:var(--verde);background:var(--verde-claro);border-radius:999px;padding:8px 16px}
+.vazio{text-align:center;color:var(--texto-3);padding:40px 0}
+
+@media (max-width:720px){
+  .app{padding:20px 16px}
+  .grade,.lista-niver,.campos,.alternar{grid-template-columns:1fr}
+  .folha{padding:22px 18px}
+  .logo-nome{font-size:19px}
+  .cartao{min-height:150px}
+}
+
+/* ---------- Painel da equipe ---------- */
+.login{max-width:420px;margin:10vh auto 0;width:100%}
+.abas{display:flex;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--borda);padding-bottom:12px}
+.abas button{border:1px solid var(--borda);background:#fff;border-radius:999px;padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;color:var(--texto-2)}
+.abas button[aria-selected="true"]{background:var(--verde);border-color:var(--verde);color:#fff}
+.abas .n{display:inline-block;margin-left:6px;font-size:12px;opacity:.85}
+.filtros{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filtros select,.filtros input[type=search]{font-size:14px;padding:9px 12px;border:1px solid var(--borda);border-radius:10px;background:#fff}
+.filtros .espaco{flex-grow:1}
+.btn-pequeno{font-size:13px;padding:8px 14px;min-height:38px}
+.registros{display:flex;flex-direction:column;gap:12px}
+.registro{background:#fff;border:1px solid var(--borda);border-radius:14px;padding:16px 18px;display:grid;grid-template-columns:1fr auto;gap:8px 16px}
+.registro.feito{opacity:.6}
+.registro .nome{font-size:16px;font-weight:600}
+.registro .meta{font-size:13px;color:var(--texto-3);display:flex;gap:6px 14px;flex-wrap:wrap}
+.registro .texto{grid-column:1 / -1;font-size:15px;white-space:pre-wrap;line-height:1.5;background:var(--fundo);border-radius:10px;padding:10px 12px}
+.registro .tags{grid-column:1 / -1;display:flex;gap:6px;flex-wrap:wrap}
+.tag{font-size:12px;font-weight:600;background:var(--verde-claro);color:var(--verde-escuro);border-radius:999px;padding:3px 10px}
+.tag.alerta{background:#FFF4E5;color:#8A4B00}
+.registro .lado{display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.zap{font-size:13px;font-weight:600;color:var(--verde);text-decoration:underline}
+.novo-niver{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;background:#fff;border:1px solid var(--borda);border-radius:14px;padding:14px 16px}
+.novo-niver .campo{flex:1 1 200px}
+.link-apagar{border:none;background:none;color:var(--erro);font-size:13px;cursor:pointer;text-decoration:underline}
+@media (max-width:720px){.registro{grid-template-columns:1fr}.registro .lado{align-items:flex-start;flex-direction:row}}
